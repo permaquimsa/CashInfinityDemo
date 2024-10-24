@@ -1,0 +1,15 @@
+C:\SDK\CashInfinityDemo\CashInfinityDemo\obj\Debug\CashInfinityDemo.csproj.AssemblyReference.cache
+C:\SDK\CashInfinityDemo\CashInfinityDemo\obj\Debug\CashInfinityDemo.Properties.Resources.resources
+C:\SDK\CashInfinityDemo\CashInfinityDemo\obj\Debug\CashInfinityDemo.csproj.GenerateResource.cache
+C:\SDK\CashInfinityDemo\CashInfinityDemo\obj\Debug\CashInfinityDemo.csproj.CoreCompileInputs.cache
+C:\SDK\CashInfinityDemo\CashInfinityDemo\obj\Debug\CashInfinityDemo.Demo.resources
+C:\SDK\CashInfinityDemo\CashInfinityDemo\bin\Debug\CollectList.xml
+C:\SDK\CashInfinityDemo\CashInfinityDemo\bin\Debug\CashInfinityDemo.exe.config
+C:\SDK\CashInfinityDemo\CashInfinityDemo\bin\Debug\CashInfinityDemo.exe
+C:\SDK\CashInfinityDemo\CashInfinityDemo\bin\Debug\CashInfinityDemo.pdb
+C:\SDK\CashInfinityDemo\CashInfinityDemo\obj\Debug\CashInfinityDemo.exe
+C:\SDK\CashInfinityDemo\CashInfinityDemo\obj\Debug\CashInfinityDemo.pdb
+C:\SDK\CashInfinityDemo\CashInfinityDemo\bin\Debug\CashInfinityDemo.exe.manifest
+C:\SDK\CashInfinityDemo\CashInfinityDemo\bin\Debug\CashInfinityDemo.application
+C:\SDK\CashInfinityDemo\CashInfinityDemo\obj\Debug\CashInfinityDemo.exe.manifest
+C:\SDK\CashInfinityDemo\CashInfinityDemo\obj\Debug\CashInfinityDemo.application
