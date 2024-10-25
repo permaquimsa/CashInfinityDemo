@@ -248,7 +248,7 @@ namespace CashInfinityDemo
             objChangeRequest.Id = GetId();
             objChangeRequest.SeqNo = GetSequenceNumber();
 
-            objChangeRequest.Amount = txtPaymentAmount.Text + "00";  // Lo que hay que pagar
+            objChangeRequest.Amount = (numInputPagar.Value * 100).ToString();  // Lo que hay que pagar
 
             try
             {
@@ -284,24 +284,37 @@ namespace CashInfinityDemo
                 case CashMovementEnum.NONE:
                     break;
                 case CashMovementEnum.Payment:
-                    string strTotalAPagar = $"A pagar: {txtPaymentAmount.Text}\n\n";
-                    string strDineroIngresado = $"Dinero ingresado:\n{obtenerTextoListaDinero(dineroIngresado)}\n";
-                    string strVuelto = $"Vuelto:\n{obtenerTextoListaDinero(dineroSaliente)}\n";
+                    if (dineroIngresado != null)
+                    {
+                        string strTotalAPagar = $"A pagar: {numInputPagar.Value}\n\n";
+                        string strDineroIngresado = $"Dinero ingresado:\n{obtenerTextoListaDinero(dineroIngresado)}\n";
+                        string strVuelto = $"Vuelto:\n{obtenerTextoListaDinero(dineroSaliente)}\n";
 
-                    MessageBox.Show(strTotalAPagar + strDineroIngresado + strVuelto);
-
+                        MessageBox.Show(strTotalAPagar + strDineroIngresado + strVuelto);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No ingresó dinero.");
+                    }
                     break;
                 case CashMovementEnum.Extraction:
-                    string strTotalARetirar = $"A retirar: {txtExtractionAmount.Text}\n\n";
-                    string strDineroRetirado = $"Dinero retirado:\n{obtenerTextoListaDinero(dineroSaliente)}\n";
-
-
-                    MessageBox.Show(strTotalARetirar + strDineroRetirado);
+                    if (dineroSaliente != null)
+                    {
+                        string strTotalARetirar = $"A retirar: {numInputRetirar.Value}\n\n";
+                        string strDineroRetirado = $"Dinero retirado:\n{obtenerTextoListaDinero(dineroSaliente)}\n";
+                        MessageBox.Show(strTotalARetirar + strDineroRetirado);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No salió dinero.");
+                    }
 
                     break;
                 default:
                     break;
             }
+            numInputPagar.Value = 0;
+            numInputRetirar.Value = 0;
             cashMovement = CashMovementEnum.NONE;
             this.DesbloquearTodosLosBotones();
         }
@@ -599,7 +612,7 @@ namespace CashInfinityDemo
             objChangeRequest.Id = GetId();
             objChangeRequest.SeqNo = GetSequenceNumber();
 
-            objChangeRequest.Amount = "-" + txtExtractionAmount.Text + "00";  // Lo que hay que pagar
+            objChangeRequest.Amount = (numInputRetirar.Value * -100).ToString();  // Lo que hay que pagar
 
             try
             {

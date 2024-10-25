@@ -39,20 +39,22 @@ namespace CashInfinityDemo
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.StatusTimer = new System.Windows.Forms.Timer(this.components);
             this.btnAcceptDeposit = new System.Windows.Forms.Button();
-            this.txtPaymentAmount = new System.Windows.Forms.TextBox();
             this.btnBeginChange = new System.Windows.Forms.Button();
             this.btnBeginReplenish = new System.Windows.Forms.Button();
             this.btnEndReplenish = new System.Windows.Forms.Button();
             this.depositoLabel = new System.Windows.Forms.Label();
             this.btnBeginCashout = new System.Windows.Forms.Button();
             this.btnInventory = new System.Windows.Forms.Button();
-            this.txtExtractionAmount = new System.Windows.Forms.TextBox();
             this.btnErrorRecovery = new System.Windows.Forms.Button();
             this.reabastecerLabel = new System.Windows.Forms.Label();
             this.compraLabel = new System.Windows.Forms.Label();
             this.retiroLabel = new System.Windows.Forms.Label();
             this.estadoDispLabel = new System.Windows.Forms.Label();
+            this.numInputPagar = new System.Windows.Forms.NumericUpDown();
+            this.numInputRetirar = new System.Windows.Forms.NumericUpDown();
             this.MainStatusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numInputPagar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numInputRetirar)).BeginInit();
             this.SuspendLayout();
             // 
             // btnBeginDeposit
@@ -118,15 +120,6 @@ namespace CashInfinityDemo
             this.btnAcceptDeposit.UseVisualStyleBackColor = true;
             this.btnAcceptDeposit.Click += new System.EventHandler(this.btnAcceptDeposit_Click);
             // 
-            // txtPaymentAmount
-            // 
-            this.txtPaymentAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPaymentAmount.Location = new System.Drawing.Point(463, 53);
-            this.txtPaymentAmount.Name = "txtPaymentAmount";
-            this.txtPaymentAmount.Size = new System.Drawing.Size(144, 30);
-            this.txtPaymentAmount.TabIndex = 5;
-            this.txtPaymentAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // btnBeginChange
             // 
             this.btnBeginChange.Location = new System.Drawing.Point(613, 43);
@@ -187,15 +180,6 @@ namespace CashInfinityDemo
             this.btnInventory.UseVisualStyleBackColor = true;
             this.btnInventory.Click += new System.EventHandler(this.btnInventory_Click);
             // 
-            // txtExtractionAmount
-            // 
-            this.txtExtractionAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExtractionAmount.Location = new System.Drawing.Point(463, 153);
-            this.txtExtractionAmount.Name = "txtExtractionAmount";
-            this.txtExtractionAmount.Size = new System.Drawing.Size(144, 30);
-            this.txtExtractionAmount.TabIndex = 13;
-            this.txtExtractionAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // btnErrorRecovery
             // 
             this.btnErrorRecovery.Location = new System.Drawing.Point(613, 246);
@@ -246,23 +230,53 @@ namespace CashInfinityDemo
             this.estadoDispLabel.TabIndex = 18;
             this.estadoDispLabel.Text = "- Estado dispositivo";
             // 
+            // numInputPagar
+            // 
+            this.numInputPagar.DecimalPlaces = 2;
+            this.numInputPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numInputPagar.Location = new System.Drawing.Point(466, 45);
+            this.numInputPagar.Maximum = new decimal(new int[] {
+            2147483646,
+            0,
+            0,
+            0});
+            this.numInputPagar.Name = "numInputPagar";
+            this.numInputPagar.Size = new System.Drawing.Size(141, 38);
+            this.numInputPagar.TabIndex = 19;
+            this.numInputPagar.ThousandsSeparator = true;
+            // 
+            // numInputRetirar
+            // 
+            this.numInputRetirar.DecimalPlaces = 2;
+            this.numInputRetirar.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numInputRetirar.Location = new System.Drawing.Point(466, 155);
+            this.numInputRetirar.Maximum = new decimal(new int[] {
+            2147483646,
+            0,
+            0,
+            0});
+            this.numInputRetirar.Name = "numInputRetirar";
+            this.numInputRetirar.Size = new System.Drawing.Size(141, 38);
+            this.numInputRetirar.TabIndex = 20;
+            this.numInputRetirar.ThousandsSeparator = true;
+            // 
             // Demo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 323);
+            this.Controls.Add(this.numInputRetirar);
+            this.Controls.Add(this.numInputPagar);
             this.Controls.Add(this.estadoDispLabel);
             this.Controls.Add(this.retiroLabel);
             this.Controls.Add(this.compraLabel);
             this.Controls.Add(this.reabastecerLabel);
             this.Controls.Add(this.btnErrorRecovery);
-            this.Controls.Add(this.txtExtractionAmount);
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnBeginCashout);
             this.Controls.Add(this.btnEndReplenish);
             this.Controls.Add(this.btnBeginReplenish);
             this.Controls.Add(this.btnBeginChange);
-            this.Controls.Add(this.txtPaymentAmount);
             this.Controls.Add(this.btnAcceptDeposit);
             this.Controls.Add(this.MainStatusStrip);
             this.Controls.Add(this.btnReset);
@@ -279,6 +293,8 @@ namespace CashInfinityDemo
             this.Text = "Cash Infinity Demo";
             this.MainStatusStrip.ResumeLayout(false);
             this.MainStatusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numInputPagar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numInputRetirar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,18 +309,18 @@ namespace CashInfinityDemo
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Timer StatusTimer;
         private System.Windows.Forms.Button btnAcceptDeposit;
-        private System.Windows.Forms.TextBox txtPaymentAmount;
         private System.Windows.Forms.Button btnBeginChange;
         private System.Windows.Forms.Button btnBeginReplenish;
         private System.Windows.Forms.Button btnEndReplenish;
         private System.Windows.Forms.Label depositoLabel;
         private System.Windows.Forms.Button btnBeginCashout;
         private System.Windows.Forms.Button btnInventory;
-        private System.Windows.Forms.TextBox txtExtractionAmount;
         private System.Windows.Forms.Button btnErrorRecovery;
         private System.Windows.Forms.Label reabastecerLabel;
         private System.Windows.Forms.Label compraLabel;
         private System.Windows.Forms.Label retiroLabel;
         private System.Windows.Forms.Label estadoDispLabel;
+        private System.Windows.Forms.NumericUpDown numInputPagar;
+        private System.Windows.Forms.NumericUpDown numInputRetirar;
     }
 }
