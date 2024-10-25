@@ -43,17 +43,21 @@ namespace CashInfinityDemo
             this.btnBeginChange = new System.Windows.Forms.Button();
             this.btnBeginReplenish = new System.Windows.Forms.Button();
             this.btnEndReplenish = new System.Windows.Forms.Button();
-            this.priceLabel = new System.Windows.Forms.Label();
+            this.depositoLabel = new System.Windows.Forms.Label();
             this.btnBeginCashout = new System.Windows.Forms.Button();
             this.btnInventory = new System.Windows.Forms.Button();
             this.txtExtractionAmount = new System.Windows.Forms.TextBox();
             this.btnErrorRecovery = new System.Windows.Forms.Button();
+            this.reabastecerLabel = new System.Windows.Forms.Label();
+            this.compraLabel = new System.Windows.Forms.Label();
+            this.retiroLabel = new System.Windows.Forms.Label();
+            this.estadoDispLabel = new System.Windows.Forms.Label();
             this.MainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBeginDeposit
             // 
-            this.btnBeginDeposit.Location = new System.Drawing.Point(32, 16);
+            this.btnBeginDeposit.Location = new System.Drawing.Point(32, 43);
             this.btnBeginDeposit.Name = "btnBeginDeposit";
             this.btnBeginDeposit.Size = new System.Drawing.Size(280, 40);
             this.btnBeginDeposit.TabIndex = 0;
@@ -63,7 +67,7 @@ namespace CashInfinityDemo
             // 
             // btnReturnDeposit
             // 
-            this.btnReturnDeposit.Location = new System.Drawing.Point(184, 62);
+            this.btnReturnDeposit.Location = new System.Drawing.Point(184, 89);
             this.btnReturnDeposit.Name = "btnReturnDeposit";
             this.btnReturnDeposit.Size = new System.Drawing.Size(128, 40);
             this.btnReturnDeposit.TabIndex = 1;
@@ -73,7 +77,7 @@ namespace CashInfinityDemo
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(472, 240);
+            this.btnReset.Location = new System.Drawing.Point(466, 246);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(144, 40);
             this.btnReset.TabIndex = 2;
@@ -106,7 +110,7 @@ namespace CashInfinityDemo
             // 
             // btnAcceptDeposit
             // 
-            this.btnAcceptDeposit.Location = new System.Drawing.Point(32, 62);
+            this.btnAcceptDeposit.Location = new System.Drawing.Point(32, 89);
             this.btnAcceptDeposit.Name = "btnAcceptDeposit";
             this.btnAcceptDeposit.Size = new System.Drawing.Size(136, 40);
             this.btnAcceptDeposit.TabIndex = 4;
@@ -117,16 +121,15 @@ namespace CashInfinityDemo
             // txtPaymentAmount
             // 
             this.txtPaymentAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPaymentAmount.Location = new System.Drawing.Point(463, 64);
+            this.txtPaymentAmount.Location = new System.Drawing.Point(463, 53);
             this.txtPaymentAmount.Name = "txtPaymentAmount";
             this.txtPaymentAmount.Size = new System.Drawing.Size(144, 30);
             this.txtPaymentAmount.TabIndex = 5;
-            this.txtPaymentAmount.Text = "0.00";
             this.txtPaymentAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnBeginChange
             // 
-            this.btnBeginChange.Location = new System.Drawing.Point(613, 54);
+            this.btnBeginChange.Location = new System.Drawing.Point(613, 43);
             this.btnBeginChange.Name = "btnBeginChange";
             this.btnBeginChange.Size = new System.Drawing.Size(144, 48);
             this.btnBeginChange.TabIndex = 7;
@@ -136,7 +139,7 @@ namespace CashInfinityDemo
             // 
             // btnBeginReplenish
             // 
-            this.btnBeginReplenish.Location = new System.Drawing.Point(32, 190);
+            this.btnBeginReplenish.Location = new System.Drawing.Point(32, 196);
             this.btnBeginReplenish.Name = "btnBeginReplenish";
             this.btnBeginReplenish.Size = new System.Drawing.Size(280, 44);
             this.btnBeginReplenish.TabIndex = 8;
@@ -146,7 +149,7 @@ namespace CashInfinityDemo
             // 
             // btnEndReplenish
             // 
-            this.btnEndReplenish.Location = new System.Drawing.Point(32, 240);
+            this.btnEndReplenish.Location = new System.Drawing.Point(32, 246);
             this.btnEndReplenish.Name = "btnEndReplenish";
             this.btnEndReplenish.Size = new System.Drawing.Size(280, 40);
             this.btnEndReplenish.TabIndex = 9;
@@ -154,19 +157,19 @@ namespace CashInfinityDemo
             this.btnEndReplenish.UseVisualStyleBackColor = true;
             this.btnEndReplenish.Click += new System.EventHandler(this.btnEndReplenish_Click);
             // 
-            // priceLabel
+            // depositoLabel
             // 
-            this.priceLabel.AutoSize = true;
-            this.priceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.priceLabel.Location = new System.Drawing.Point(457, 16);
-            this.priceLabel.Name = "priceLabel";
-            this.priceLabel.Size = new System.Drawing.Size(287, 31);
-            this.priceLabel.TabIndex = 10;
-            this.priceLabel.Text = "Indique precio del Item";
+            this.depositoLabel.AutoSize = true;
+            this.depositoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.depositoLabel.Location = new System.Drawing.Point(26, 9);
+            this.depositoLabel.Name = "depositoLabel";
+            this.depositoLabel.Size = new System.Drawing.Size(240, 31);
+            this.depositoLabel.TabIndex = 10;
+            this.depositoLabel.Text = "- Realizar depósito";
             // 
             // btnBeginCashout
             // 
-            this.btnBeginCashout.Location = new System.Drawing.Point(613, 136);
+            this.btnBeginCashout.Location = new System.Drawing.Point(613, 145);
             this.btnBeginCashout.Name = "btnBeginCashout";
             this.btnBeginCashout.Size = new System.Drawing.Size(144, 48);
             this.btnBeginCashout.TabIndex = 11;
@@ -176,7 +179,7 @@ namespace CashInfinityDemo
             // 
             // btnInventory
             // 
-            this.btnInventory.Location = new System.Drawing.Point(344, 240);
+            this.btnInventory.Location = new System.Drawing.Point(338, 246);
             this.btnInventory.Name = "btnInventory";
             this.btnInventory.Size = new System.Drawing.Size(120, 40);
             this.btnInventory.TabIndex = 12;
@@ -187,16 +190,15 @@ namespace CashInfinityDemo
             // txtExtractionAmount
             // 
             this.txtExtractionAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExtractionAmount.Location = new System.Drawing.Point(463, 144);
+            this.txtExtractionAmount.Location = new System.Drawing.Point(463, 153);
             this.txtExtractionAmount.Name = "txtExtractionAmount";
             this.txtExtractionAmount.Size = new System.Drawing.Size(144, 30);
             this.txtExtractionAmount.TabIndex = 13;
-            this.txtExtractionAmount.Text = "0.00";
             this.txtExtractionAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnErrorRecovery
             // 
-            this.btnErrorRecovery.Location = new System.Drawing.Point(619, 240);
+            this.btnErrorRecovery.Location = new System.Drawing.Point(613, 246);
             this.btnErrorRecovery.Name = "btnErrorRecovery";
             this.btnErrorRecovery.Size = new System.Drawing.Size(144, 40);
             this.btnErrorRecovery.TabIndex = 14;
@@ -204,11 +206,55 @@ namespace CashInfinityDemo
             this.btnErrorRecovery.UseVisualStyleBackColor = true;
             this.btnErrorRecovery.Click += new System.EventHandler(this.btnErrorRecovery_Click);
             // 
+            // reabastecerLabel
+            // 
+            this.reabastecerLabel.AutoSize = true;
+            this.reabastecerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.reabastecerLabel.Location = new System.Drawing.Point(26, 162);
+            this.reabastecerLabel.Name = "reabastecerLabel";
+            this.reabastecerLabel.Size = new System.Drawing.Size(185, 31);
+            this.reabastecerLabel.TabIndex = 15;
+            this.reabastecerLabel.Text = "- Reabastecer";
+            // 
+            // compraLabel
+            // 
+            this.compraLabel.AutoSize = true;
+            this.compraLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.compraLabel.Location = new System.Drawing.Point(420, 9);
+            this.compraLabel.Name = "compraLabel";
+            this.compraLabel.Size = new System.Drawing.Size(323, 31);
+            this.compraLabel.TabIndex = 16;
+            this.compraLabel.Text = "- Pagar total de la compra";
+            // 
+            // retiroLabel
+            // 
+            this.retiroLabel.AutoSize = true;
+            this.retiroLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.retiroLabel.Location = new System.Drawing.Point(420, 111);
+            this.retiroLabel.Name = "retiroLabel";
+            this.retiroLabel.Size = new System.Drawing.Size(199, 31);
+            this.retiroLabel.TabIndex = 17;
+            this.retiroLabel.Text = "- Realizar retiro";
+            // 
+            // estadoDispLabel
+            // 
+            this.estadoDispLabel.AutoSize = true;
+            this.estadoDispLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.estadoDispLabel.Location = new System.Drawing.Point(420, 209);
+            this.estadoDispLabel.Name = "estadoDispLabel";
+            this.estadoDispLabel.Size = new System.Drawing.Size(250, 31);
+            this.estadoDispLabel.TabIndex = 18;
+            this.estadoDispLabel.Text = "- Estado dispositivo";
+            // 
             // Demo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 323);
+            this.Controls.Add(this.estadoDispLabel);
+            this.Controls.Add(this.retiroLabel);
+            this.Controls.Add(this.compraLabel);
+            this.Controls.Add(this.reabastecerLabel);
             this.Controls.Add(this.btnErrorRecovery);
             this.Controls.Add(this.txtExtractionAmount);
             this.Controls.Add(this.btnInventory);
@@ -222,7 +268,7 @@ namespace CashInfinityDemo
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnReturnDeposit);
             this.Controls.Add(this.btnBeginDeposit);
-            this.Controls.Add(this.priceLabel);
+            this.Controls.Add(this.depositoLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -251,10 +297,14 @@ namespace CashInfinityDemo
         private System.Windows.Forms.Button btnBeginChange;
         private System.Windows.Forms.Button btnBeginReplenish;
         private System.Windows.Forms.Button btnEndReplenish;
-        private System.Windows.Forms.Label priceLabel;
+        private System.Windows.Forms.Label depositoLabel;
         private System.Windows.Forms.Button btnBeginCashout;
         private System.Windows.Forms.Button btnInventory;
         private System.Windows.Forms.TextBox txtExtractionAmount;
         private System.Windows.Forms.Button btnErrorRecovery;
+        private System.Windows.Forms.Label reabastecerLabel;
+        private System.Windows.Forms.Label compraLabel;
+        private System.Windows.Forms.Label retiroLabel;
+        private System.Windows.Forms.Label estadoDispLabel;
     }
 }

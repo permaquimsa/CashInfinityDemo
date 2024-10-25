@@ -178,6 +178,27 @@ namespace CashInfinityDemo
 
         int seqNumber;
 
+        private void BloquearBotonesDistintosA(List<Button> botonesNoBloquear)
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button button && !botonesNoBloquear.Contains(button))
+                {
+                    button.Enabled = false;
+                }
+            }
+        }
+
+        private void DesbloquearTodosLosBotones()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button button)
+                {
+                    button.Enabled = true;
+                }
+            }
+        }
 
         private enum CashMovementEnum
         {
@@ -191,8 +212,12 @@ namespace CashInfinityDemo
         public Demo()
         {
             InitializeComponent();
+            clsBrueBoxService.CashinCancelOperationCompleted += new com.glory.fcc.service.CashinCancelOperationCompletedEventHandler(CashinCancelOperationCompletedEventHandler);
+            clsBrueBoxService.EndCashinOperationCompleted += new EndCashinOperationCompletedEventHandler(EndCashinOperationOperationCompletedEventHandler);
+            clsBrueBoxService.EndReplenishmentFromEntranceOperationCompleted += new EndReplenishmentFromEntranceOperationCompletedEventHandler(EndReplenishmentFromEntranceOperationCompletedEventHandler);
             clsBrueBoxService.ChangeOperationCompleted += new com.glory.fcc.service.ChangeOperationCompletedEventHandler(ChangeOperationCompletedEventHandler);
             clsBrueBoxService.InventoryOperationCompleted += new com.glory.fcc.service.InventoryOperationCompletedEventHandler(InventoryOperationCompletedEventHandler);
+            clsBrueBoxService.ResetOperationCompleted += new ResetOperationCompletedEventHandler(ResetOperationCompletedEventHandler);
         }
 
         private void btnBeginDeposit_Click(object sender, EventArgs e)
@@ -204,6 +229,7 @@ namespace CashInfinityDemo
             try
             {
                 clsBrueBoxService.StartCashinOperationAsync(objDepositRequest);
+                this.BloquearBotonesDistintosA(new List<Button> { btnAcceptDeposit, btnReturnDeposit });
                 //exclusionProcessing(false);
                 //printer.PrintHeader();
             }
@@ -227,6 +253,7 @@ namespace CashInfinityDemo
             try
             {
                 clsBrueBoxService.ChangeOperationAsync(objChangeRequest);
+                this.BloquearBotonesDistintosA(new List<Button>());
 
             }
             catch (Exception ex)
@@ -275,15 +302,18 @@ namespace CashInfinityDemo
                 default:
                     break;
             }
-
-
             cashMovement = CashMovementEnum.NONE;
-
+            this.DesbloquearTodosLosBotones();
         }
 
         private void btnReturnDeposit_Click(object sender, EventArgs e)
         {
             CancelCashIn();
+        }
+
+        void CashinCancelOperationCompletedEventHandler(object sender, com.glory.fcc.service.CashinCancelOperationCompletedEventArgs arg)
+        {
+            this.DesbloquearTodosLosBotones();
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -296,18 +326,19 @@ namespace CashInfinityDemo
 
             try
             {
-                this.MainStatusStrip.Items[0].Text = "Iniciando reset...";
-                objResetResponse = clsBrueBoxService.ResetOperation(objResetRequest);
-                if (int.Parse(objResetResponse.result) != FCC_SUCCESS)
-                {
-                    MessageBox.Show("Reset could not be achieved.");
-                }
+                clsBrueBoxService.ResetOperationAsync(objResetRequest);
+                this.BloquearBotonesDistintosA(new List<Button>());
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+        void ResetOperationCompletedEventHandler(object sender, com.glory.fcc.service.ResetOperationCompletedEventArgs arg)
+        {
+            this.DesbloquearTodosLosBotones();
+        }
+
         private string GetId()
         {
             return DateTime.Now.ToString();
@@ -503,6 +534,11 @@ namespace CashInfinityDemo
 
         }
 
+        void EndCashinOperationOperationCompletedEventHandler(object sender, com.glory.fcc.service.EndCashinOperationCompletedEventArgs arg)
+        {
+            this.DesbloquearTodosLosBotones();
+        }
+
         private void btnBeginReplenish_Click(object sender, EventArgs e)
         {
             com.glory.fcc.service.StartReplenishmentFromEntranceRequestType objCashinRequest = new com.glory.fcc.service.StartReplenishmentFromEntranceRequestType();
@@ -518,6 +554,10 @@ namespace CashInfinityDemo
                 {
                     //error handling
                     MessageBox.Show("Start Replenishment failed." + objCashinResponse.result);
+                }
+                else
+                {
+                    this.BloquearBotonesDistintosA(new List<Button> { btnEndReplenish });
                 }
             }
             catch (Exception ex)
@@ -537,41 +577,17 @@ namespace CashInfinityDemo
             objEndReplenishmentFromEntranceRequest.SeqNo = GetSequenceNumber();
             try
             {
-                objEndReplenishmentFromEntranceResponse = clsBrueBoxService.EndReplenishmentFromEntranceOperation(objEndReplenishmentFromEntranceRequest);
-                if ((int.Parse(objEndReplenishmentFromEntranceResponse.result) == FCC_EXCLUSIVE_ERROR))
-                {
-                    MessageBox.Show("End Replenishment excluded.");
-                    return;
-                }
-                else if (int.Parse(objEndReplenishmentFromEntranceResponse.result) != FCC_SUCCESS)
-                {
-                    MessageBox.Show("End Replenishment failed.");
-                }
-                else
-                {
-
-                    if (objEndReplenishmentFromEntranceResponse.Cash.Denomination != null)
-                    {
-                        for (i = 0; i < objEndReplenishmentFromEntranceResponse.Cash.Denomination.Length; i++)
-                        {
-                            if (int.Parse(objEndReplenishmentFromEntranceResponse.Cash.Denomination[i].devid) == DEVID_RBW100)
-                            {
-                                str = str + "RBW ";
-                            }
-                            else if (int.Parse(objEndReplenishmentFromEntranceResponse.Cash.Denomination[i].devid) == DEVID_RCW100)
-                            {
-                                str = str + "RCW ";
-                            }
-                            str = str + String.Format("{0:f2}", double.Parse(objEndReplenishmentFromEntranceResponse.Cash.Denomination[i].fv) / 100) + ":" + objEndReplenishmentFromEntranceResponse.Cash.Denomination[i].Piece + "\n";
-                        }
-                        MessageBox.Show(str);
-                    }
-                }
+                clsBrueBoxService.EndReplenishmentFromEntranceOperationAsync(objEndReplenishmentFromEntranceRequest);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
+        }
+
+        void EndReplenishmentFromEntranceOperationCompletedEventHandler(object sender, com.glory.fcc.service.EndReplenishmentFromEntranceOperationCompletedEventArgs arg)
+        {
+            this.DesbloquearTodosLosBotones();
         }
 
         private void btnBeginCashout_Click(object sender, EventArgs e)
@@ -588,6 +604,7 @@ namespace CashInfinityDemo
             try
             {
                 clsBrueBoxService.ChangeOperationAsync(objChangeRequest);
+                this.BloquearBotonesDistintosA(new List<Button>());
 
             }
             catch (Exception ex)
@@ -638,6 +655,7 @@ namespace CashInfinityDemo
             try
             {
                 clsBrueBoxService.ResetOperationAsync(objResetRequestType);
+                this.BloquearBotonesDistintosA(new List<Button>());
             }
             catch (Exception ex)
             {
