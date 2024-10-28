@@ -178,24 +178,32 @@ namespace CashInfinityDemo
 
         int seqNumber;
 
-        private void BloquearBotonesDistintosA(List<Button> botonesNoBloquear)
+        private void BloquearBotonesDistintosA(List<Button> botonesNoBloquear, Control parent)
         {
-            foreach (Control control in this.Controls)
+            foreach (Control control in parent.Controls)
             {
                 if (control is Button button && !botonesNoBloquear.Contains(button))
                 {
                     button.Enabled = false;
                 }
+                else if (control.HasChildren)
+                {
+                    BloquearBotonesDistintosA(botonesNoBloquear, control); // Recursive call
+                }
             }
         }
 
-        private void DesbloquearTodosLosBotones()
+        private void DesbloquearTodosLosBotones(Control parent)
         {
-            foreach (Control control in this.Controls)
+            foreach (Control control in parent.Controls)
             {
                 if (control is Button button)
                 {
                     button.Enabled = true;
+                }
+                else if (control.HasChildren)
+                {
+                    DesbloquearTodosLosBotones(control); // Recursive call
                 }
             }
         }
@@ -229,7 +237,7 @@ namespace CashInfinityDemo
             try
             {
                 clsBrueBoxService.StartCashinOperationAsync(objDepositRequest);
-                this.BloquearBotonesDistintosA(new List<Button> { btnAcceptDeposit, btnReturnDeposit });
+                BloquearBotonesDistintosA(new List<Button> { btnAcceptDeposit, btnReturnDeposit }, this);
                 //exclusionProcessing(false);
                 //printer.PrintHeader();
             }
@@ -253,7 +261,7 @@ namespace CashInfinityDemo
             try
             {
                 clsBrueBoxService.ChangeOperationAsync(objChangeRequest);
-                this.BloquearBotonesDistintosA(new List<Button>());
+                BloquearBotonesDistintosA(new List<Button>(), this);
 
             }
             catch (Exception ex)
@@ -274,7 +282,7 @@ namespace CashInfinityDemo
                 foreach (DenominationType denominacion in listaDinero)
                 {
                     total += double.Parse(denominacion.fv) * int.Parse(denominacion.Piece);
-                    strResumen += $"{denominacion.Piece} billete/s de {denominacion.cc} {double.Parse(denominacion.fv) / 100}\n";
+                    strResumen += $"{denominacion.Piece} pieza/s de {denominacion.cc} {double.Parse(denominacion.fv) / 100}\n";
                 }
                 return $"TOTAL={total / 100}\n{strResumen}";
             }
@@ -316,7 +324,7 @@ namespace CashInfinityDemo
             numInputPagar.Value = 0;
             numInputRetirar.Value = 0;
             cashMovement = CashMovementEnum.NONE;
-            this.DesbloquearTodosLosBotones();
+            DesbloquearTodosLosBotones(this);
         }
 
         private void btnReturnDeposit_Click(object sender, EventArgs e)
@@ -326,7 +334,7 @@ namespace CashInfinityDemo
 
         void CashinCancelOperationCompletedEventHandler(object sender, com.glory.fcc.service.CashinCancelOperationCompletedEventArgs arg)
         {
-            this.DesbloquearTodosLosBotones();
+            DesbloquearTodosLosBotones(this);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -340,7 +348,7 @@ namespace CashInfinityDemo
             try
             {
                 clsBrueBoxService.ResetOperationAsync(objResetRequest);
-                this.BloquearBotonesDistintosA(new List<Button>());
+                BloquearBotonesDistintosA(new List<Button>(), this);
             }
             catch (Exception ex)
             {
@@ -349,7 +357,7 @@ namespace CashInfinityDemo
         }
         void ResetOperationCompletedEventHandler(object sender, com.glory.fcc.service.ResetOperationCompletedEventArgs arg)
         {
-            this.DesbloquearTodosLosBotones();
+            DesbloquearTodosLosBotones(this);
         }
 
         private string GetId()
@@ -549,7 +557,7 @@ namespace CashInfinityDemo
 
         void EndCashinOperationOperationCompletedEventHandler(object sender, com.glory.fcc.service.EndCashinOperationCompletedEventArgs arg)
         {
-            this.DesbloquearTodosLosBotones();
+            DesbloquearTodosLosBotones(this);
         }
 
         private void btnBeginReplenish_Click(object sender, EventArgs e)
@@ -570,7 +578,7 @@ namespace CashInfinityDemo
                 }
                 else
                 {
-                    this.BloquearBotonesDistintosA(new List<Button> { btnEndReplenish });
+                    BloquearBotonesDistintosA(new List<Button> { btnEndReplenish }, this);
                 }
             }
             catch (Exception ex)
@@ -600,7 +608,7 @@ namespace CashInfinityDemo
 
         void EndReplenishmentFromEntranceOperationCompletedEventHandler(object sender, com.glory.fcc.service.EndReplenishmentFromEntranceOperationCompletedEventArgs arg)
         {
-            this.DesbloquearTodosLosBotones();
+            DesbloquearTodosLosBotones(this);
         }
 
         private void btnBeginCashout_Click(object sender, EventArgs e)
@@ -617,7 +625,7 @@ namespace CashInfinityDemo
             try
             {
                 clsBrueBoxService.ChangeOperationAsync(objChangeRequest);
-                this.BloquearBotonesDistintosA(new List<Button>());
+                BloquearBotonesDistintosA(new List<Button>(), this);
 
             }
             catch (Exception ex)
@@ -668,7 +676,7 @@ namespace CashInfinityDemo
             try
             {
                 clsBrueBoxService.ResetOperationAsync(objResetRequestType);
-                this.BloquearBotonesDistintosA(new List<Button>());
+                BloquearBotonesDistintosA(new List<Button>(), this);
             }
             catch (Exception ex)
             {
