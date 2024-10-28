@@ -296,7 +296,7 @@ namespace CashInfinityDemo
                     {
                         string strTotalAPagar = $"A pagar: {numInputPagar.Value}\n\n";
                         string strDineroIngresado = $"Dinero ingresado:\n{obtenerTextoListaDinero(dineroIngresado)}\n";
-                        string strVuelto = $"Vuelto:\n{obtenerTextoListaDinero(dineroSaliente)}\n";
+                        string strVuelto = (dineroSaliente!=null) ? $"Vuelto:\n{obtenerTextoListaDinero(dineroSaliente)}\n" : "";
 
                         MessageBox.Show(strTotalAPagar + strDineroIngresado + strVuelto);
                     }
