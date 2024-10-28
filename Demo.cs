@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Interop;
 
 
 namespace CashInfinityDemo
@@ -177,6 +178,14 @@ namespace CashInfinityDemo
         public com.glory.fcc.service.BrueBoxService clsBrueBoxService2 = new com.glory.fcc.service.BrueBoxService();
 
         int seqNumber;
+
+        /// <summary>
+        /// Socket
+        /// </summary>
+        private ISPKEventHandled ISPKSocket;
+
+        private string protocol = "http";
+        private string ip = "192.168.0.25";
 
         private void BloquearBotonesDistintosA(List<Button> botonesNoBloquear, Control parent)
         {
@@ -682,6 +691,97 @@ namespace CashInfinityDemo
             {
                 MessageBox.Show(" Exception:" + ex.Message.ToString() + "\n");
             }
+        }
+
+        private void checkBoxSocket_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxSocket.Checked)
+            {
+                if (ISPKSocket == null)
+                {
+                    ISPKSocket = new ISPKEventHandled(56541, 20);
+
+                    ISPKSocket.WriteResponse += WriteResponses;
+                    ISPKSocket.UpdateCounted += ISPKSocket_UpdateCounted;
+                    ISPKSocket.UpdateInventory += ISPKSocket_UpdateInventory;
+                    ISPKSocket.UpdateToDispensed += ISPKSocket_UpdateToDispensed;
+                    ISPKSocket.IncompleteTransaction += ISPKSocket_IncompleteTransaction;
+                    ISPKSocket.MachineReporting += ISPKSocket_MachineReporting;
+                    ISPKSocket.ErrorFound += ISPKSocket_ErrorFound;
+                    ISPKSocket.UpdatePayment += ISPKSocket_UpdatePayment;
+                    ISPKSocket.OperationStatus += ISPKSocket_OperationStatus;
+                    ISPKSocket.RecyclerStatus += ISPKSocket_RecyclerStatus;
+                }
+            }
+            else
+            {
+                this.Invoke(new Action(() =>
+                {
+                    eventTextbox.Text = string.Empty;
+                }));
+            }
+        }
+
+        private void WriteResponses(object sender, string msj)
+        {
+            if (!checkBoxSocket.Checked)
+                return;
+
+                this.Invoke(new Action(() =>
+            {
+                eventTextbox.Text += msj + Environment.NewLine;
+            }));
+        }
+
+        private void ISPKSocket_RecyclerStatus(object sender, MultiArgsEvent e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ISPKSocket_OperationStatus(object sender, string e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ISPKSocket_UpdatePayment(object sender, double e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ISPKSocket_ErrorFound(object sender, string e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ISPKSocket_MachineReporting(object sender, bool e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ISPKSocket_IncompleteTransaction(object sender, System.Xml.XmlNode e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ISPKSocket_UpdateToDispensed(object sender, double e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ISPKSocket_UpdateInventory(object sender, System.Xml.XmlNode e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void ISPKSocket_UpdateCounted(object sender, double e)
+        {
+            if (!checkBoxSocket.Checked)
+                return;
+
+            this.Invoke(new Action(() =>
+            {
+                eventTextbox.Text = e.ToString();
+            }));
         }
     }
 }

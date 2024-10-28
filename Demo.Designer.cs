@@ -52,6 +52,9 @@ namespace CashInfinityDemo
             this.groupBoxCompra = new System.Windows.Forms.GroupBox();
             this.groupBoxRetiro = new System.Windows.Forms.GroupBox();
             this.groupBoxOtros = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.eventTextbox = new System.Windows.Forms.TextBox();
+            this.checkBoxSocket = new System.Windows.Forms.CheckBox();
             this.MainStatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numInputPagar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numInputRetirar)).BeginInit();
@@ -60,6 +63,7 @@ namespace CashInfinityDemo
             this.groupBoxCompra.SuspendLayout();
             this.groupBoxRetiro.SuspendLayout();
             this.groupBoxOtros.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnBeginDeposit
@@ -100,7 +104,7 @@ namespace CashInfinityDemo
             this.MainStatusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.MainStatusStrip.Location = new System.Drawing.Point(0, 322);
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 571);
             this.MainStatusStrip.Name = "MainStatusStrip";
             this.MainStatusStrip.Size = new System.Drawing.Size(822, 26);
             this.MainStatusStrip.TabIndex = 3;
@@ -287,11 +291,45 @@ namespace CashInfinityDemo
             this.groupBoxOtros.TabStop = false;
             this.groupBoxOtros.Text = "Otros";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBoxSocket);
+            this.groupBox1.Controls.Add(this.eventTextbox);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(8, 328);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(800, 232);
+            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Eventos";
+            // 
+            // eventTextbox
+            // 
+            this.eventTextbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.eventTextbox.Location = new System.Drawing.Point(8, 47);
+            this.eventTextbox.Multiline = true;
+            this.eventTextbox.Name = "eventTextbox";
+            this.eventTextbox.Size = new System.Drawing.Size(784, 188);
+            this.eventTextbox.TabIndex = 0;
+            // 
+            // checkBoxSocket
+            // 
+            this.checkBoxSocket.AutoSize = true;
+            this.checkBoxSocket.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxSocket.Location = new System.Drawing.Point(660, 18);
+            this.checkBoxSocket.Name = "checkBoxSocket";
+            this.checkBoxSocket.Size = new System.Drawing.Size(130, 26);
+            this.checkBoxSocket.TabIndex = 1;
+            this.checkBoxSocket.Text = "Ver Eventos";
+            this.checkBoxSocket.UseVisualStyleBackColor = true;
+            this.checkBoxSocket.CheckedChanged += new System.EventHandler(this.checkBoxSocket_CheckedChanged);
+            // 
             // Demo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 348);
+            this.ClientSize = new System.Drawing.Size(822, 597);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxOtros);
             this.Controls.Add(this.groupBoxRetiro);
             this.Controls.Add(this.groupBoxCompra);
@@ -315,6 +353,8 @@ namespace CashInfinityDemo
             this.groupBoxCompra.ResumeLayout(false);
             this.groupBoxRetiro.ResumeLayout(false);
             this.groupBoxOtros.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,5 +382,8 @@ namespace CashInfinityDemo
         private System.Windows.Forms.GroupBox groupBoxCompra;
         private System.Windows.Forms.GroupBox groupBoxRetiro;
         private System.Windows.Forms.GroupBox groupBoxOtros;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox checkBoxSocket;
+        private System.Windows.Forms.TextBox eventTextbox;
     }
 }
