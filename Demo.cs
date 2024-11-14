@@ -225,6 +225,12 @@ namespace CashInfinityDemo
 
         }
 
+        private Dictionary<int, string> tipoDinero = new Dictionary<int, string>
+        {
+            { 1, "billete" },
+            { 2, "moneda" }
+        };
+
         private CashMovementEnum cashMovement = CashMovementEnum.NONE;
         public Demo()
         {
@@ -291,7 +297,7 @@ namespace CashInfinityDemo
                 foreach (DenominationType denominacion in listaDinero)
                 {
                     total += double.Parse(denominacion.fv) * int.Parse(denominacion.Piece);
-                    strResumen += $"{denominacion.Piece} pieza/s de {denominacion.cc} {double.Parse(denominacion.fv) / 100}\n";
+                    strResumen += $"{denominacion.Piece} {tipoDinero[int.Parse(denominacion.devid)]}/s de {denominacion.cc} {double.Parse(denominacion.fv) / 100}\n";
                 }
                 return $"TOTAL={total / 100}\n{strResumen}";
             }
@@ -670,7 +676,7 @@ namespace CashInfinityDemo
             string str = "";
             foreach (DenominationType denominacion in inventario)
             {
-                str += $"{denominacion.cc} {double.Parse(denominacion.fv) / 100} x {denominacion.Piece}\n";
+                str += $"{denominacion.cc} {double.Parse(denominacion.fv) / 100} x {denominacion.Piece} {tipoDinero[int.Parse(denominacion.devid)]}/s \n";
             }
 
             MessageBox.Show(str);
