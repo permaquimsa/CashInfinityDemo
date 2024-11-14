@@ -654,6 +654,7 @@ namespace CashInfinityDemo
             try
             {
                 clsBrueBoxService.InventoryOperationAsync(objInventoryRequest);
+                BloquearBotonesDistintosA(new List<Button>(), this);
 
             }
             catch (Exception ex)
@@ -673,6 +674,7 @@ namespace CashInfinityDemo
             }
 
             MessageBox.Show(str);
+            DesbloquearTodosLosBotones(this);
         }
 
         private void btnErrorRecovery_Click(object sender, EventArgs e)
